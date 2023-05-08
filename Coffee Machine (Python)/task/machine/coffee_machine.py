@@ -30,15 +30,22 @@ class CoffeMachine:
     machineCleaningNeed = 0
     machineBroken = 0
 
+    # Chance of machine breaking down
+    breakChance = random.randint(1, 8)
+
+    # Machine upgrades
+    betterFilter = 0
+    fasterMaker = 0
+
     def whatToDo(self):
-        print('Write action (buy, maintenance, take, remaining, exit)')
+        print('Write action (buy, take, remaining, maintenance, upgrade, exit)')
 
     def __init__(self, name, water, coffeeBeans, milk, money, cups):
         self.name = 'The coffee machine'
         self.water = 400  # Ml
         self.coffeeBeans = 120  # Grams
         self.milk = 540  # Ml
-        self.money = 550  # Dollar
+        self.money = 5500  # Dollar
         self.cups = 9  # Amount of disposable cups
 
     def userInput(self):
@@ -119,6 +126,7 @@ class CoffeMachine:
             elif _userInput == 'back':
                 self.whatToDo()
 
+    # Maintenance on the coffe machine.
     def maintenance(self):
         print('What do you want to do? | 1 - fill | 2 - clean | 3 - repair')
         _userInput = self.userInput()
@@ -129,6 +137,7 @@ class CoffeMachine:
         elif _userInput == '3':
             self.repair()
 
+    # Cleans the coffee machine.
     def clean(self):
         print('Starting the cleaning process')
         str(time.sleep(1))
@@ -147,6 +156,60 @@ class CoffeMachine:
 
         self.machineCleaningNeed = 0
 
+    # Upgrades the coffe machine.
+    def upgrade(self):
+        print('What do you want to upgrade?'
+              '\n1 - Better filter - cost $750, -15% machine breakdown base chance'
+              '\n2 - Faster coffee maker - cost $1500, +35% coffee making speed'
+              '\n3 - Back to main menu')
+        _userInput = self.userInput()
+        if _userInput == '1' and self.money >= 750 and self.betterFilter < 1:
+            print('Starting the upgrade of a better filter')
+            str(time.sleep(1))
+            print('[:----]')
+            str(time.sleep(1))
+            print('[::---]')
+            str(time.sleep(1))
+            print('[:::--]')
+            str(time.sleep(1))
+            print('[::::-]')
+            str(time.sleep(1))
+            print('[:::::]')
+            str(time.sleep(1))
+            print('Done!')
+            str(time.sleep(1))
+
+            self.money -= 750
+            self.betterFilter += 1
+            self.breakChance = random.randint(1, 20)
+
+        elif _userInput == '1' and self.money < 750:
+            print('Not enough money for the better filter')
+        elif _userInput == '2' and self.money >= 1500 and self.fasterMaker < 1:
+            print('Starting the upgrade of a faster coffee maker')
+            str(time.sleep(1))
+            print('[:----]')
+            str(time.sleep(1))
+            print('[::---]')
+            str(time.sleep(1))
+            print('[:::--]')
+            str(time.sleep(1))
+            print('[::::-]')
+            str(time.sleep(1))
+            print('[:::::]')
+            str(time.sleep(1))
+            print('Done!')
+            str(time.sleep(1))
+
+            self.money -= 1500
+            self.fasterMaker += 1
+        elif _userInput == '2' and self.money < 1500:
+            print('Not enough money for the faster coffee maker')
+
+        elif _userInput == '3':
+            self.whatToDo()
+
+    # Repairs the coffee machine.
     def repair(self):
         print('You start repairing the machine.')
         str(time.sleep(1))
@@ -165,6 +228,7 @@ class CoffeMachine:
 
         self.machineBroken -= 1
 
+    # Fills the coffee machine's resources
     def fill(self):
         print('Write how many ml of water you want to add:')
         _userInputWater = self.userInput()
@@ -198,19 +262,34 @@ class CoffeMachine:
         self.machineState = False
 
     def makingCoffee(self):
-        str(time.sleep(1))
-        print('[:----]')
-        str(time.sleep(1))
-        print('[::---]')
-        str(time.sleep(1))
-        print('[:::--]')
-        str(time.sleep(1))
-        print('[::::-]')
-        str(time.sleep(1))
-        print('[:::::]')
-        str(time.sleep(1))
-        print('Done!')
-        str(time.sleep(1))
+        if self.betterFilter == 1:
+            str(time.sleep(0.65))
+            print('[:----]')
+            str(time.sleep(0.65))
+            print('[::---]')
+            str(time.sleep(0.65))
+            print('[:::--]')
+            str(time.sleep(0.65))
+            print('[::::-]')
+            str(time.sleep(0.65))
+            print('[:::::]')
+            str(time.sleep(0.65))
+            print('Done!')
+            str(time.sleep(1))
+        else:
+            str(time.sleep(1))
+            print('[:----]')
+            str(time.sleep(1))
+            print('[::---]')
+            str(time.sleep(1))
+            print('[:::--]')
+            str(time.sleep(1))
+            print('[::::-]')
+            str(time.sleep(1))
+            print('[:::::]')
+            str(time.sleep(1))
+            print('Done!')
+            str(time.sleep(1))
 
 
 CoffeMachine = CoffeMachine('The coffee machine', 400, 120, 540, 550, 9)
@@ -226,12 +305,13 @@ while CoffeMachine.machineState:
         if CoffeMachine.machineBroken == 1:
             print('The machine has broken down. It needs repair.')
         else:
-            randomNum = random.randint(0, 20)
-            if randomNum == 0:
+            if CoffeMachine.breakChance == 1:
                 print('The machine has broken down. It needs repair.')
                 CoffeMachine.machineBroken += 1
             else:
                 CoffeMachine.buy()
+    elif userInput == 'upgrade':
+        CoffeMachine.upgrade()
     elif userInput == 'maintenance':
         CoffeMachine.maintenance()
     elif userInput == 'take':
