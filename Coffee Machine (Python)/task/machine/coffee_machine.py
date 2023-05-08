@@ -171,19 +171,7 @@ class CoffeMachine:
     # Cleans the coffee machine.
     def clean(self):
         print('Starting the cleaning process')
-        str(time.sleep(1))
-        print('[:----]')
-        str(time.sleep(1))
-        print('[::---]')
-        str(time.sleep(1))
-        print('[:::--]')
-        str(time.sleep(1))
-        print('[::::-]')
-        str(time.sleep(1))
-        print('[:::::]')
-        str(time.sleep(1))
-        print('Done!')
-        str(time.sleep(1))
+        self.standardSpeed()
 
         self.machineCleaningNeed = 0
 
