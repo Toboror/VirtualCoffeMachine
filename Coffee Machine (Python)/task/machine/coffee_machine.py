@@ -1,5 +1,5 @@
 import time
-# test
+
 
 class CoffeMachine:
     machineState = True
@@ -27,7 +27,6 @@ class CoffeMachine:
 
     # Cleaning need from 0 to 5
     machineCleaningNeed = 0
-
 
     def whatToDo(self):
         print('Write action (buy, maintenance, take, remaining, exit)')
