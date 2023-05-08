@@ -30,6 +30,37 @@ class CoffeMachine:
     machineCleaningNeed = 0
     machineBroken = 0
 
+    # Coffee making speeds
+    def standardSpeed(self):
+        str(time.sleep(1))
+        print('[:----]')
+        str(time.sleep(1))
+        print('[::---]')
+        str(time.sleep(1))
+        print('[:::--]')
+        str(time.sleep(1))
+        print('[::::-]')
+        str(time.sleep(1))
+        print('[:::::]')
+        str(time.sleep(1))
+        print('Done!')
+        str(time.sleep(1))
+
+    def upgradedSpeed(self):
+        str(time.sleep(0.65))
+        print('[:----]')
+        str(time.sleep(0.65))
+        print('[::---]')
+        str(time.sleep(0.65))
+        print('[:::--]')
+        str(time.sleep(0.65))
+        print('[::::-]')
+        str(time.sleep(0.65))
+        print('[:::::]')
+        str(time.sleep(0.65))
+        print('Done!')
+        str(time.sleep(1))
+
     # Chance of machine breaking down
     breakChance = random.randint(1, 8)
 
@@ -165,19 +196,7 @@ class CoffeMachine:
         _userInput = self.userInput()
         if _userInput == '1' and self.money >= 750 and self.betterFilter < 1:
             print('Starting the upgrade of a better filter')
-            str(time.sleep(1))
-            print('[:----]')
-            str(time.sleep(1))
-            print('[::---]')
-            str(time.sleep(1))
-            print('[:::--]')
-            str(time.sleep(1))
-            print('[::::-]')
-            str(time.sleep(1))
-            print('[:::::]')
-            str(time.sleep(1))
-            print('Done!')
-            str(time.sleep(1))
+            self.standardSpeed()
 
             self.money -= 750
             self.betterFilter += 1
@@ -187,19 +206,7 @@ class CoffeMachine:
             print('Not enough money for the better filter')
         elif _userInput == '2' and self.money >= 1500 and self.fasterMaker < 1:
             print('Starting the upgrade of a faster coffee maker')
-            str(time.sleep(1))
-            print('[:----]')
-            str(time.sleep(1))
-            print('[::---]')
-            str(time.sleep(1))
-            print('[:::--]')
-            str(time.sleep(1))
-            print('[::::-]')
-            str(time.sleep(1))
-            print('[:::::]')
-            str(time.sleep(1))
-            print('Done!')
-            str(time.sleep(1))
+            self.standardSpeed()
 
             self.money -= 1500
             self.fasterMaker += 1
@@ -212,19 +219,7 @@ class CoffeMachine:
     # Repairs the coffee machine.
     def repair(self):
         print('You start repairing the machine.')
-        str(time.sleep(1))
-        print('[:----]')
-        str(time.sleep(1))
-        print('[::---]')
-        str(time.sleep(1))
-        print('[:::--]')
-        str(time.sleep(1))
-        print('[::::-]')
-        str(time.sleep(1))
-        print('[:::::]')
-        str(time.sleep(1))
-        print('Done!')
-        str(time.sleep(1))
+        self.standardSpeed()
 
         self.machineBroken -= 1
 
@@ -263,33 +258,9 @@ class CoffeMachine:
 
     def makingCoffee(self):
         if self.betterFilter == 1:
-            str(time.sleep(0.65))
-            print('[:----]')
-            str(time.sleep(0.65))
-            print('[::---]')
-            str(time.sleep(0.65))
-            print('[:::--]')
-            str(time.sleep(0.65))
-            print('[::::-]')
-            str(time.sleep(0.65))
-            print('[:::::]')
-            str(time.sleep(0.65))
-            print('Done!')
-            str(time.sleep(1))
+            self.upgradedSpeed()
         else:
-            str(time.sleep(1))
-            print('[:----]')
-            str(time.sleep(1))
-            print('[::---]')
-            str(time.sleep(1))
-            print('[:::--]')
-            str(time.sleep(1))
-            print('[::::-]')
-            str(time.sleep(1))
-            print('[:::::]')
-            str(time.sleep(1))
-            print('Done!')
-            str(time.sleep(1))
+            self.standardSpeed()
 
 
 CoffeMachine = CoffeMachine('The coffee machine', 400, 120, 540, 550, 9)
