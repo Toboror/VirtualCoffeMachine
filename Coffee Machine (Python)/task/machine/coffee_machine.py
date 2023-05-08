@@ -1,4 +1,5 @@
 import time
+import random
 
 
 class CoffeMachine:
@@ -25,8 +26,9 @@ class CoffeMachine:
     cappuccinoCoffeBeanCost = 12
     cappuccinoPrice = 6
 
-    # Cleaning need from 0 to 5
+    # Machine maintenance
     machineCleaningNeed = 0
+    machineBroken = 0
 
     def whatToDo(self):
         print('Write action (buy, maintenance, take, remaining, exit)')
@@ -118,12 +120,14 @@ class CoffeMachine:
                 self.whatToDo()
 
     def maintenance(self):
-        print('What do you want to do? | 1 - fill | 2 - clean')
+        print('What do you want to do? | 1 - fill | 2 - clean | 3 - repair')
         _userInput = self.userInput()
         if _userInput == '1':
             self.fill()
         elif _userInput == '2':
             self.clean()
+        elif _userInput == '3':
+            self.repair()
 
     def clean(self):
         print('Starting the cleaning process')
@@ -142,6 +146,24 @@ class CoffeMachine:
         str(time.sleep(1))
 
         self.machineCleaningNeed = 0
+
+    def repair(self):
+        print('You start repairing the machine.')
+        str(time.sleep(1))
+        print('[:----]')
+        str(time.sleep(1))
+        print('[::---]')
+        str(time.sleep(1))
+        print('[:::--]')
+        str(time.sleep(1))
+        print('[::::-]')
+        str(time.sleep(1))
+        print('[:::::]')
+        str(time.sleep(1))
+        print('Done!')
+        str(time.sleep(1))
+
+        self.machineBroken -= 1
 
     def fill(self):
         print('Write how many ml of water you want to add:')
@@ -199,8 +221,17 @@ while CoffeMachine.machineState:
 
     userInput = CoffeMachine.userInput()
 
+    # A 5% chance of the machine breaking down everything user tries to buy.
     if userInput == 'buy':
-        CoffeMachine.buy()
+        if CoffeMachine.machineBroken == 1:
+            print('The machine has broken down. It needs repair.')
+        else:
+            randomNum = random.randint(0, 20)
+            if randomNum == 0:
+                print('The machine has broken down. It needs repair.')
+                CoffeMachine.machineBroken += 1
+            else:
+                CoffeMachine.buy()
     elif userInput == 'maintenance':
         CoffeMachine.maintenance()
     elif userInput == 'take':
