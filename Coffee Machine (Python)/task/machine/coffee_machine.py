@@ -262,32 +262,39 @@ class CoffeMachine:
 
 CoffeMachine = CoffeMachine('The coffee machine', 400, 120, 540, 550, 9)
 
-while CoffeMachine.machineState:
 
-    CoffeMachine.whatToDo()
+def runMachine():
+    while CoffeMachine.machineState:
 
-    userInput = CoffeMachine.userInput()
+        CoffeMachine.whatToDo()
 
-    # A 5% chance of the machine breaking down everything user tries to buy.
-    if userInput == 'buy':
-        if CoffeMachine.machineBroken == 1:
-            print('The machine has broken down. It needs repair.')
-        else:
-            if CoffeMachine.breakChance == 1:
+        userInput = CoffeMachine.userInput()
+
+        # A 5% chance of the machine breaking down everything user tries to buy.
+        if userInput == 'buy':
+            if CoffeMachine.machineBroken == 1:
                 print('The machine has broken down. It needs repair.')
-                CoffeMachine.machineBroken += 1
             else:
-                CoffeMachine.buy()
-    elif userInput == 'upgrade':
-        CoffeMachine.upgrade()
-    elif userInput == 'maintenance':
-        CoffeMachine.maintenance()
-    elif userInput == 'take':
-        CoffeMachine.take()
-    elif userInput == 'remaining':
-        print(CoffeMachine.resources())
-        print()
-    elif userInput == 'money':
-        CoffeMachine.checkMoney()
-    elif userInput == 'exit':
-        CoffeMachine.exit()
+                if CoffeMachine.breakChance == 1:
+                    print('The machine has broken down. It needs repair.')
+                    CoffeMachine.machineBroken += 1
+                else:
+                    CoffeMachine.buy()
+        elif userInput == 'upgrade':
+            CoffeMachine.upgrade()
+        elif userInput == 'maintenance':
+            CoffeMachine.maintenance()
+        elif userInput == 'take':
+            CoffeMachine.take()
+        elif userInput == 'remaining':
+            print(CoffeMachine.resources())
+            print()
+        elif userInput == 'money':
+            CoffeMachine.checkMoney()
+        elif userInput == 'exit':
+            CoffeMachine.exit()
+
+
+if __name__ == "__main__":
+    runMachine()
+    # Line number 300 :)
