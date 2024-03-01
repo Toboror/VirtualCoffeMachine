@@ -1,5 +1,6 @@
 import time
 import random
+import subprocess
 
 
 class CoffeMachine:
@@ -241,16 +242,16 @@ class CoffeMachine:
                 '\n{} ml of water'
                 '\n{} ml of milk'
                 '\n{} g of coffee beans'
-                '\n{} disposable cups'
-                '\n${} of money'.format(self.name, self.water, self.milk, self.coffeeBeans, self.cups, self.money))
+                '\n{} disposable cups'.format(self.name, self.water, self.milk, self.coffeeBeans, self.cups))
 
-    # Returns current amount of money
+    # Displays current amount of money
     def checkMoney(self):
         return print('$' + str(self.money))
 
     # Turns the machine 'off'
     def exit(self):
         self.machineState = False
+        subprocess.run(["python", "main.py"])
 
     def makingCoffee(self):
         if self.betterFilter == 1:
