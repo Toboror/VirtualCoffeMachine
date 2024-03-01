@@ -103,18 +103,18 @@ class CoffeMachine:
 
     def buyAutomatic(self):
         # Espresso.
-            if self.water >= self.espressoWaterCost and \
-                    self.coffeeBeans >= self.espressoCoffeeBeanCost and self.machineCleaningNeed < 5:
-                print(self.enoughResources)
-                self.makingCoffee()
-                self.coffeeBeans -= self.espressoCoffeeBeanCost
-                self.water -= self.espressoWaterCost
-                self.money += self.espressoPrice
-                self.machineCleaningNeed += 1
-            elif self.machineCleaningNeed > 5:
-                print('Not able to make coffee. The machine needs cleaning.')
-            else:
-                print(self.sorryNotEnough + str(self.checkMissingIngredients()))
+        if self.water >= self.espressoWaterCost and \
+                self.coffeeBeans >= self.espressoCoffeeBeanCost and self.machineCleaningNeed < 5:
+            print(self.enoughResources)
+            self.makingCoffee()
+            self.coffeeBeans -= self.espressoCoffeeBeanCost
+            self.water -= self.espressoWaterCost
+            self.money += self.espressoPrice
+            self.machineCleaningNeed += 1
+        elif self.machineCleaningNeed > 5:
+            print('Not able to make coffee. The machine needs cleaning.')
+        else:
+            print(self.sorryNotEnough + str(self.checkMissingIngredients()))
 
     def buy(self):
         print('What do you want to buy? '

@@ -20,7 +20,9 @@ while True:
     elif userInput == '3':
         print('You have chosen the special option!')
         unitA.desCartes()
-        unitA.whatToDo()
-        userInput = input()
-        unitA.makeMoney(userInput)
+        running = True
+        while running:
+            unitA.whatToDo()
+            userInput = input()
+            unitA.makeMoney(userInput)
         exit()
