@@ -69,7 +69,7 @@ class CoffeMachine:
     fasterMaker = 0
 
     def whatToDo(self):
-        print('Write action (buy, take, remaining, maintenance, upgrade, exit)')
+        print('Write action (buy, take, remaining, maintenance, upgrade, money, exit)')
 
     def __init__(self, name, water, coffeeBeans, milk, money, cups):
         self.name = 'The coffee machine'
@@ -159,7 +159,7 @@ class CoffeMachine:
 
     # Maintenance on the coffe machine.
     def maintenance(self):
-        print('What do you want to do? | 1 - fill | 2 - clean | 3 - repair')
+        print('What do you want to do? | 1 - fill | 2 - clean | 3 - repair | 4 - back')
         _userInput = self.userInput()
         if _userInput == '1':
             self.fill()
@@ -167,6 +167,8 @@ class CoffeMachine:
             self.clean()
         elif _userInput == '3':
             self.repair()
+        elif _userInput == '4':
+            print()
 
     # Cleans the coffee machine.
     def clean(self):
@@ -182,27 +184,29 @@ class CoffeMachine:
               '\n2 - Faster coffee maker - cost $1500, +35% coffee making speed'
               '\n3 - Back to main menu')
         _userInput = self.userInput()
-        if _userInput == '1' and self.money >= 750 and self.betterFilter < 1:
+        if _userInput == '1' and self.money >= 750 and self.betterFilter != 1:
             print('Starting the upgrade of a better filter')
             self.standardSpeed()
 
             self.money -= 750
             self.betterFilter += 1
             self.breakChance = random.randint(1, 20)
+        elif _userInput == '1':
+            if self.money < 750:
+                print('Not enough money for the better filter')
+            elif self.betterFilter == 1:
+                print('You already have the better filter!')
 
-        elif _userInput == '1' and self.money < 750:
-            print('Not enough money for the better filter')
-        elif _userInput == '2' and self.money >= 1500 and self.fasterMaker < 1:
-            print('Starting the upgrade of a faster coffee maker')
-            self.standardSpeed()
-
-            self.money -= 1500
-            self.fasterMaker += 1
-        elif _userInput == '2' and self.money < 1500:
-            print('Not enough money for the faster coffee maker')
-
-        elif _userInput == '3':
-            self.whatToDo()
+        elif _userInput == '2':
+            if self.money >= 1500 and self.fasterMaker != 1:
+                print('Starting the upgrade of a faster coffee maker')
+                self.money -= 1500
+                self.fasterMaker += 1
+                self.standardSpeed()
+            elif self.money < 1500:
+                print('Not enough money for the faster coffee maker!')
+            elif self.fasterMaker == 1:
+                print('You already have the faster coffee maker!')
 
     # Repairs the coffee machine.
     def repair(self):
@@ -239,6 +243,10 @@ class CoffeMachine:
                 '\n{} g of coffee beans'
                 '\n{} disposable cups'
                 '\n${} of money'.format(self.name, self.water, self.milk, self.coffeeBeans, self.cups, self.money))
+
+    # Returns current amount of money
+    def checkMoney(self):
+        return print('$' + str(self.money))
 
     # Turns the machine 'off'
     def exit(self):
@@ -278,5 +286,7 @@ while CoffeMachine.machineState:
     elif userInput == 'remaining':
         print(CoffeMachine.resources())
         print()
+    elif userInput == 'money':
+        CoffeMachine.checkMoney()
     elif userInput == 'exit':
         CoffeMachine.exit()
