@@ -1,5 +1,6 @@
 import subprocess
 from coffee_machine import CoffeMachine
+import unitA
 
 while True:
     # Prints the main page message.
@@ -18,8 +19,8 @@ while True:
         exit()
     elif userInput == '3':
         print('You have chosen the special option!')
-        CoffeMachine.standardSpeed()
-        print('The coffee machine has $' + str(CoffeMachine.money))
-
-
-
+        unitA.desCartes()
+        unitA.whatToDo()
+        userInput = input()
+        unitA.makeMoney(userInput)
+        exit()
