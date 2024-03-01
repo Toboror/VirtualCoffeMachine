@@ -23,6 +23,7 @@ def makeMoney(userInput):
         CoffeMachine.coffeeBeans *= 5
 
         # TODO MAKE IT STOP LOOPING AFTER IT DOES NOT HAVE ENOUGH WATER TO CONTINUE!
+        # TODO THERE IS ALSO A BUG WHERE IF YOU MAKE COFFEE YOURSELF AND THEN FROM UNITA THE MONEY AMOUNT IS WRONG
         while running:
             # The logic is backwards, but it works so do not question it.
             CoffeMachine.buyAutomatic()
